@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentmanagementsystem.AllStudentController">
+   <children>
+      <TableView fx:id="studentTable" prefHeight="409.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="nameColl" prefWidth="151.0" text="Name" />
+          <TableColumn fx:id="emailColl" prefWidth="140.0" text="Email" />
+            <TableColumn fx:id="departmentColl" prefWidth="128.0" text="Department" />
+            <TableColumn fx:id="addressColl" prefWidth="178.0" text="Address" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>
