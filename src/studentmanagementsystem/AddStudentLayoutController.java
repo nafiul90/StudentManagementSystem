@@ -5,6 +5,9 @@
  */
 package studentmanagementsystem;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -43,7 +46,7 @@ public class AddStudentLayoutController implements Initializable {
     static ObservableList<Student> stdList=FXCollections.observableArrayList();
     
     @FXML
-    private void saveButtonAction(ActionEvent event) {
+    private void saveButtonAction(ActionEvent event) throws IOException {
         
         String name=studentName.getText();
         String email=studentEmail.getText();
@@ -54,7 +57,15 @@ public class AddStudentLayoutController implements Initializable {
         if(name.equals("") && email.equals("") && dept.equals("") & adr.equals("")) return;
         Student std=new Student(name,email,dept,adr);
         
-        stdList.add(std);
+        File file=new File("data.txt");
+        if(!file.exists()) file.createNewFile();
+        
+        FileWriter fileWriter=new FileWriter(file,true);
+        fileWriter.write(name+"#"+email+"#"+dept+"#"+adr+"\n");
+        fileWriter.close();
+        
+        
+        
         
         studentName.clear();
         studentEmail.clear();
