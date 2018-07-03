@@ -6,14 +6,20 @@
 package studentmanagementsystem;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -41,6 +47,9 @@ public class AllStudentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        studentTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
         AddStudentLayoutController.stdList.clear();
         try {
             File file=new File("data.txt");
@@ -66,5 +75,26 @@ public class AllStudentController implements Initializable {
         }
         
     }    
+
+    @FXML
+    private void deleteButtonAction(ActionEvent event) throws IOException {
+        
+        List<Student> selectedStudents=studentTable.getSelectionModel().getSelectedItems();
+        AddStudentLayoutController.stdList.removeAll(selectedStudents);
+        
+        File file=new File("data.txt");
+        FileWriter fileWriter=new FileWriter(file);
+        
+        String str="";
+        for(Student std:AddStudentLayoutController.stdList){
+            str+=std.getName()+"#"+std.getEmail()+"#"+std.getDepartment()+"#"+std.getAddress()+"\n";
+        }
+        
+        fileWriter.write(str);
+        fileWriter.close();
+        
+    }
+
+    
     
 }
