@@ -12,8 +12,8 @@
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="600.0" spacing="14.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-            <TextField fx:id="studentName" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Id" />
+            <TextField fx:id="idField" />
          </children>
          <padding>
             <Insets left="75.0" />
@@ -21,8 +21,8 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="600.0" spacing="14.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-            <TextField fx:id="studentEmail" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+            <TextField fx:id="nameField" />
          </children>
          <padding>
             <Insets left="77.0" />
@@ -30,8 +30,8 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="600.0" spacing="14.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />
-            <TextField fx:id="department" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+            <TextField fx:id="emailField" />
          </children>
          <padding>
             <Insets left="35.0" />
@@ -39,8 +39,8 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="600.0" spacing="14.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
-            <TextArea fx:id="address" prefHeight="200.0" prefWidth="200.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="address" />
+            <TextArea fx:id="addressField" prefHeight="200.0" prefWidth="200.0" />
          </children>
          <padding>
             <Insets left="61.0" />

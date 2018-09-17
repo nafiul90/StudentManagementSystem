@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -37,10 +38,11 @@ public class AllStudentController implements Initializable {
     private TableColumn<Student, String> nameColl;
     @FXML
     private TableColumn<Student, String> emailColl;
-    @FXML
-    private TableColumn<Student, String> departmentColl;
+    
     @FXML
     private TableColumn<Student, String> addressColl;
+    @FXML
+    private TableColumn<Student, Integer> idColl;
 
     /**
      * Initializes the controller class.
@@ -51,47 +53,33 @@ public class AllStudentController implements Initializable {
         studentTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         
         AddStudentLayoutController.stdList.clear();
+        
+        //database action..
+        
+        DatabaseAction dbAction=new DatabaseAction();
         try {
-            File file=new File("data.txt");
-            if(!file.exists())file.createNewFile();
-            
-            Scanner sc=new Scanner(file);
-            while(sc.hasNext()){
-                String str=sc.nextLine();
-                String parts[]=str.split("#");
-                
-                Student std=new Student(parts[0],parts[1],parts[2],parts[3]);
-                AddStudentLayoutController.stdList.add(std);
-            }
-            
-            nameColl.setCellValueFactory(new PropertyValueFactory<Student,String>("name"));
-            emailColl.setCellValueFactory(new PropertyValueFactory<Student,String>("email"));
-            departmentColl.setCellValueFactory(new PropertyValueFactory<Student,String>("department"));
-            addressColl.setCellValueFactory(new PropertyValueFactory<Student,String>("address"));
-            
-            studentTable.setItems(AddStudentLayoutController.stdList);
-        } catch (IOException ex) {
+            AddStudentLayoutController.stdList= dbAction.getAllStudents();
+        } catch (SQLException ex) {
             Logger.getLogger(AllStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+     
+            
+        idColl.setCellValueFactory(new PropertyValueFactory<Student,Integer>("Id"));
+        nameColl.setCellValueFactory(new PropertyValueFactory<Student,String>("name"));
+        emailColl.setCellValueFactory(new PropertyValueFactory<Student,String>("email"));
+            
+        addressColl.setCellValueFactory(new PropertyValueFactory<Student,String>("address"));
+            
+        studentTable.setItems(AddStudentLayoutController.stdList);
         
     }    
 
     @FXML
     private void deleteButtonAction(ActionEvent event) throws IOException {
         
-        List<Student> selectedStudents=studentTable.getSelectionModel().getSelectedItems();
-        AddStudentLayoutController.stdList.removeAll(selectedStudents);
         
-        File file=new File("data.txt");
-        FileWriter fileWriter=new FileWriter(file);
-        
-        String str="";
-        for(Student std:AddStudentLayoutController.stdList){
-            str+=std.getName()+"#"+std.getEmail()+"#"+std.getDepartment()+"#"+std.getAddress()+"\n";
-        }
-        
-        fileWriter.write(str);
-        fileWriter.close();
         
     }
 

@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -27,13 +28,13 @@ import javafx.scene.control.TextField;
 public class AddStudentLayoutController implements Initializable {
 
     @FXML
-    private TextField studentName;
+    private TextField idField;
     @FXML
-    private TextField studentEmail;
+    private TextField nameField;
     @FXML
-    private TextField department;
+    private TextField emailField;
     @FXML
-    private TextArea address;
+    private TextArea addressField;
 
     /**
      * Initializes the controller class.
@@ -46,37 +47,42 @@ public class AddStudentLayoutController implements Initializable {
     static ObservableList<Student> stdList=FXCollections.observableArrayList();
     
     @FXML
-    private void saveButtonAction(ActionEvent event) throws IOException {
+    private void saveButtonAction(ActionEvent event) throws IOException, SQLException {
         
-        String name=studentName.getText();
-        String email=studentEmail.getText();
-        String dept=department.getText();
-        String adr=address.getText();
+        if(idField.getText().equals("")) return;
+        
+        int id=Integer.parseInt(idField.getText());
+        String name=nameField.getText();
+        String email=emailField.getText();
+      
+        String adr=addressField.getText();
         
         
-        if(name.equals("") && email.equals("") && dept.equals("") & adr.equals("")) return;
-        Student std=new Student(name,email,dept,adr);
-        
-        File file=new File("data.txt");
-        if(!file.exists()) file.createNewFile();
-        
-        FileWriter fileWriter=new FileWriter(file,true);
-        fileWriter.write(name+"#"+email+"#"+dept+"#"+adr+"\n");
-        fileWriter.close();
+        if(name.equals("") && email.equals("") && adr.equals("")) return;
+        Student std=new Student(id,name,email,adr);
         
         
         
+        //database action
+        DatabaseAction dbAction=new DatabaseAction();
+        dbAction.insertStudent(std);
         
-        studentName.clear();
-        studentEmail.clear();
-        department.clear();
-        address.clear();
+        
+        nameField.clear();
+        emailField.clear();
+        idField.clear();
+        addressField.clear();
         
         
     }
 
     @FXML
     private void resetButtonAction(ActionEvent event) {
+        nameField.clear();
+        emailField.clear();
+        idField.clear();
+        addressField.clear();
+        
     }
     
 }

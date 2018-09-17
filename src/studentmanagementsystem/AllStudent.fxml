@@ -9,9 +9,9 @@
    <children>
       <TableView fx:id="studentTable" prefHeight="409.0" prefWidth="600.0">
         <columns>
-          <TableColumn fx:id="nameColl" prefWidth="151.0" text="Name" />
-          <TableColumn fx:id="emailColl" prefWidth="140.0" text="Email" />
-            <TableColumn fx:id="departmentColl" prefWidth="128.0" text="Department" />
+          <TableColumn fx:id="idColl" prefWidth="151.0" text="Id" />
+          <TableColumn fx:id="nameColl" prefWidth="140.0" text="Name" />
+            <TableColumn fx:id="emailColl" prefWidth="128.0" text="Email" />
             <TableColumn fx:id="addressColl" prefWidth="178.0" text="Address" />
         </columns>
       </TableView>

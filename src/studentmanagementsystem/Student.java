@@ -10,19 +10,27 @@ package studentmanagementsystem;
  * @author nafiul
  */
 public class Student {
+    private int id;
     private String name;
     private String email;
-    private String department;
     private String address;
 
-    public Student(String name, String email, String department, String address) {
+    public Student() {
+    }
+
+    public Student(int id, String name, String email, String address) {
+        this.id = id;
         this.name = name;
         this.email = email;
-        this.department = department;
         this.address = address;
     }
 
-    public Student() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -41,14 +49,6 @@ public class Student {
         this.email = email;
     }
 
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -59,8 +59,9 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "name=" + name + ", email=" + email + ", department=" + department + ", address=" + address + '}';
+        return "Student{" + "id=" + id + ", name=" + name + ", email=" + email + ", address=" + address + '}';
     }
+
     
     
     
