@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,7 +79,15 @@ public class AllStudentController implements Initializable {
     }    
 
     @FXML
-    private void deleteButtonAction(ActionEvent event) throws IOException {
+    private void deleteButtonAction(ActionEvent event) throws SQLException{
+       
+        ObservableList<Student> selectedStudents=FXCollections.observableArrayList();
+        selectedStudents=studentTable.getSelectionModel().getSelectedItems();
+        
+        DatabaseAction dbAction=new DatabaseAction();
+        dbAction.deleteStudents(selectedStudents);
+        
+        AddStudentLayoutController.stdList.removeAll(selectedStudents);
         
         
         

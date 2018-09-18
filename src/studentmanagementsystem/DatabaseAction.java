@@ -42,7 +42,7 @@ public class DatabaseAction {
             String address=rs.getString("address");
             String email=rs.getString("email");
             
-            Student student=new Student(id,name,address,email);
+            Student student=new Student(id,name,email,address);
             stdList.add(student);
         }
         return stdList;
@@ -63,5 +63,19 @@ public class DatabaseAction {
         }     
         
     }
+    
+   void deleteStudents(ObservableList<Student> selectedStudents) throws SQLException{
+       Connection conn=getConnection();
+       Statement statement=conn.createStatement();
+       
+       for(Student student:selectedStudents){
+           String query="delete from student where id = "+student.getId();
+           statement.executeUpdate(query);
+       }
+       
+       
+   }
+        
+    
     
 }
